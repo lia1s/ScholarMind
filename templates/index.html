@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf8f7">
+
+    <title>ScholarMind — Teaching Workspace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <aside class="sidebar" id="sidebar">
+            <a href="#dashboard" class="brand">
+                <span class="brand-symbol">S</span>
+                <span class="brand-name">Scholar<span>Mind</span></span>
+            </a>
+
+            <div class="workspace-label">WORKSPACE</div>
+
+            <nav class="side-nav" aria-label="Main navigation">
+                <a href="#dashboard" class="nav-link active">
+                    <span class="nav-icon">◈</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#create-lesson" class="nav-link">
+                    <span class="nav-icon">＋</span>
+                    <span>Create lesson</span>
+                </a>
+
+                <a href="#how-it-works" class="nav-link">
+                    <span class="nav-icon">◇</span>
+                    <span>How it works</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-spacer"></div>
+
+            <div class="sidebar-note">
+                <div class="note-icon">✦</div>
+                <strong>More time for teaching</strong>
+                <p>Organize your lesson preparation in one workspace.</p>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="avatar">SM</div>
+                <div class="footer-user">
+                    <strong>Teacher workspace</strong>
+                    <span>Personal learning studio</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-area" id="dashboard">
+
+            <header class="topbar">
+                <button
+                    class="mobile-menu"
+                    type="button"
+                    id="mobileMenu"
+                    aria-label="Toggle navigation"
+                    aria-expanded="false"
+                >☰</button>
+
+                <div class="breadcrumb">
+                    <span>Workspace</span>
+                    <span class="breadcrumb-divider">/</span>
+                    <strong>Dashboard</strong>
+                </div>
+
+                <div class="topbar-right">
+                    <span class="status-dot"></span>
+                    <span>Teaching workspace</span>
+                </div>
+            </header>
+
+            <div class="page-content">
+
+                <section class="welcome-section">
+                    <div class="welcome-copy">
+                        <div class="eyebrow">
+                            <span class="eyebrow-line"></span>
+                            YOUR TEACHING ASSISTANT
+                        </div>
+
+                        <h1>Make room for<br><span>better teaching.</span></h1>
+
+                        <p>
+                            Transform your learning materials into structured
+                            lesson plans, learning objectives, and classroom
+                            assessments — all in one place.
+                        </p>
+
+                        <a href="#create-lesson" class="primary-link">
+                            Create a lesson
+                            <span>↗</span>
+                        </a>
+                    </div>
+
+                    <div class="welcome-art" aria-hidden="true">
+                        <div class="art-orbit orbit-one"></div>
+                        <div class="art-orbit orbit-two"></div>
+
+                        <div class="art-card art-card-back">
+                            <div class="mini-lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="art-card art-card-front">
+                            <div class="art-card-top">
+                                <span class="art-dot"></span>
+                                <span class="art-dot"></span>
+                                <span class="art-dot"></span>
+                            </div>
+
+                            <div class="art-document-icon">✳</div>
+                            <div class="art-title-line"></div>
+                            <div class="art-text-line"></div>
+                            <div class="art-text-line short"></div>
+
+                            <div class="art-progress">
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="floating-badge badge-top">✦ Structured lessons</div>
+                        <div class="floating-badge badge-bottom">✓ Ready to review</div>
+                    </div>
+                </section>
+
+                <section class="stats-grid" aria-label="Workspace overview">
+                    <div class="stat-card">
+                        <div class="stat-icon icon-burgundy">▤</div>
+                        <div class="stat-copy">
+                            <span>WORKFLOW</span>
+                            <strong>One workspace</strong>
+                            <p>From source to lesson</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon icon-peach">✳</div>
+                        <div class="stat-copy">
+                            <span>INPUT FORMAT</span>
+                            <strong>PDF & TXT</strong>
+                            <p>Upload learning materials</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon icon-lilac">◷</div>
+                        <div class="stat-copy">
+                            <span>YOUR CONTROL</span>
+                            <strong>Teacher reviewed</strong>
+                            <p>Review before classroom use</p>
+                        </div>
+                    </div>
+                </section>
+
+                {% if error %}
+                <div class="alert alert-error" role="alert">
+                    <span class="alert-symbol">!</span>
+                    <div>
+                        <strong>We couldn't process that document</strong>
+                        <p>{{ error }}</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <section class="create-section" id="create-lesson">
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-kicker">01 / GET STARTED</span>
+                            <h2>Create your lesson</h2>
+                            <p>Start with a document. We'll organize the material for you.</p>
+                        </div>
+
+                        <span class="step-badge">STEP 1 OF 2</span>
+                    </div>
+
+                    <form
+                        action="{{ url_for('index') }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        id="uploadForm"
+                    >
+                        <div class="form-panel">
+
+                            <div class="panel-heading">
+                                <div class="panel-heading-icon">↥</div>
+                                <div>
+                                    <h3>Source material</h3>
+                                    <p>Choose the document you want to work with.</p>
+                                </div>
+                            </div>
+
+                            <label class="dropzone" id="dropzone" for="document">
+                                <input
+                                    type="file"
+                                    id="document"
+                                    name="document"
+                                    accept=".pdf,.txt"
+                                    required
+                                >
+
+                                <span class="upload-visual">
+                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+
+                                <span class="dropzone-title" id="fileLabel">
+                                    Drop your file here, or <span>browse</span>
+                                </span>
+
+                                <span class="dropzone-description">
+                                    PDF or TXT · Maximum file size 10 MB
+                                </span>
+
+                                <span class="file-selected" id="fileSelected" hidden></span>
+                            </label>
+
+                            <div class="form-divider"></div>
+
+                            <div class="form-section-label">
+                                <span class="section-kicker">LESSON SETTINGS</span>
+                                <span class="muted-label">Personalize your output</span>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-field field-subject">
+                                    <label for="subject">Subject or topic</label>
+                                    <input
+                                        type="text"
+                                        name="subject"
+                                        id="subject"
+                                        placeholder="e.g. Cybersecurity Fundamentals"
+                                        value="{{ request.form.get('subject', '') }}"
+                                        required
+                                    >
+                                    <span class="field-hint">What are you teaching?</span>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="level">Student level</label>
+                                    <div class="select-wrap">
+                                        <select name="level" id="level">
+                                            {% set current_level = request.form.get('level', 'Beginner') %}
+                                            <option value="Beginner" {% if current_level == 'Beginner' %}selected{% endif %}>Beginner</option>
+                                            <option value="Intermediate" {% if current_level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+                                            <option value="Advanced" {% if current_level == 'Advanced' %}selected{% endif %}>Advanced</option>
+                                        </select>
+                                    </div>
+                                    <span class="field-hint">Set the learning level.</span>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="duration">Lesson duration</label>
+                                    <div class="select-wrap">
+                                        <select name="duration" id="duration">
+                                            {% set current_duration = request.form.get('duration', '45') %}
+                                            <option value="30" {% if current_duration == '30' %}selected{% endif %}>30 minutes</option>
+                                            <option value="45" {% if current_duration == '45' %}selected{% endif %}>45 minutes</option>
+                                            <option value="60" {% if current_duration == '60' %}selected{% endif %}>60 minutes</option>
+                                            <option value="90" {% if current_duration == '90' %}selected{% endif %}>90 minutes</option>
+                                        </select>
+                                    </div>
+                                    <span class="field-hint">Plan your classroom time.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <p class="privacy-note">
+                                    <span>◇</span>
+                                    Your document is processed for this request.
+                                </p>
+
+                                <button class="generate-button" id="generateButton" type="submit">
+                                    <span class="button-label">Generate materials</span>
+                                    <span class="button-arrow">↗</span>
+                                </button>
+                            </div>
+
+                            <div class="loading-state" id="loadingState" hidden>
+                                <div class="loading-spinner"></div>
+                                <div>
+                                    <strong>Preparing your lesson</strong>
+                                    <p>Reading your document and organizing the content...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                {% if analysis %}
+                <section class="results-section" id="results">
+                    <div class="results-title-row">
+                        <div>
+                            <span class="section-kicker">02 / YOUR OUTPUT</span>
+                            <h2>Your lesson workspace</h2>
+                            <p>Review, refine, and use these materials as a starting point.</p>
+                        </div>
+
+                        <button class="outline-button no-print" type="button" id="printButton">
+                            <span>↗</span> Print report
+                        </button>
+                    </div>
+
+                    <div class="result-overview">
+                        <div class="result-overview-main">
+                            <span class="overview-icon">✳</span>
+                            <div>
+                                <span class="overview-label">LESSON TOPIC</span>
+                                <h3>{{ analysis.subject }}</h3>
+                                <p>{{ analysis.level }} level <span>·</span> {{ analysis.duration }} minutes</p>
+                            </div>
+                        </div>
+
+                        <div class="overview-metrics">
+                            <div>
+                                <strong>{{ analysis.word_count }}</strong>
+                                <span>Words analyzed</span>
+                            </div>
+                            <div>
+                                <strong>{{ analysis.key_terms|length }}</strong>
+                                <span>Key terms</span>
+                            </div>
+                            <div>
+                                <strong>{{ analysis.quiz|length }}</strong>
+                                <span>Quiz questions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-grid">
+
+                        <article class="result-card lesson-card">
+                            <div class="result-card-header">
+                                <span class="result-icon result-icon-burgundy">▤</span>
+                                <div>
+                                    <span class="result-label">TEACHING STRUCTURE</span>
+                                    <h3>Lesson plan</h3>
+                                </div>
+                            </div>
+
+                            <div class="timeline">
+                                {% for section in analysis.lesson_plan %}
+                                <div class="timeline-item">
+                                    <div class="timeline-marker">{{ loop.index }}</div>
+                                    <div class="timeline-content">
+                                        <h4>{{ section.title }}</h4>
+                                        <ul>
+                                            {% for sentence in section["items"] %}
+                                            <li>{{ sentence }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </article>
+
+                        <article class="result-card objectives-card">
+                            <div class="result-card-header">
+                                <span class="result-icon result-icon-peach">◎</span>
+                                <div>
+                                    <span class="result-label">EXPECTED OUTCOMES</span>
+                                    <h3>Learning objectives</h3>
+                                </div>
+                            </div>
+
+                            <p class="card-intro">By the end of the lesson, students should be able to:</p>
+
+                            <ul class="objective-list">
+                                {% for objective in analysis.objectives %}
+                                <li>
+                                    <span class="check-mark">✓</span>
+                                    <span>{{ objective }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </article>
+
+                        <article class="result-card terms-card">
+                            <div class="result-card-header">
+                                <span class="result-icon result-icon-lilac">✳</span>
+                                <div>
+                                    <span class="result-label">CORE VOCABULARY</span>
+                                    <h3>Key terms</h3>
+                                </div>
+                            </div>
+
+                            <div class="terms-list">
+                                {% for term in analysis.key_terms %}
+                                <div class="term-row">
+                                    <div class="term-bullet"></div>
+                                    <div>
+                                        <h4>{{ term.term }}</h4>
+                                        <p>{{ term.definition }}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </article>
+
+                        <article class="result-card quiz-card">
+                            <div class="result-card-header">
+                                <span class="result-icon result-icon-green">✓</span>
+                                <div>
+                                    <span class="result-label">KNOWLEDGE CHECK</span>
+                                    <h3>Multiple-choice quiz</h3>
+                                </div>
+                            </div>
+
+                            <p class="card-intro">Select a question to reveal its suggested answer.</p>
+
+                            <div class="quiz-list">
+                                {% for question in analysis.quiz %}
+                                <div class="quiz-question">
+                                    <div class="quiz-question-title">
+                                        <span class="question-number">{{ "%02d"|format(loop.index) }}</span>
+                                        <h4>{{ question.question }}</h4>
+                                    </div>
+
+                                    <ol class="quiz-options" type="A">
+                                        {% for option in question.options %}
+                                        <li>{{ option }}</li>
+                                        {% endfor %}
+                                    </ol>
+
+                                    <details class="answer-details">
+                                        <summary>
+                                            <span>Reveal suggested answer</span>
+                                            <span class="answer-chevron">⌄</span>
+                                        </summary>
+                                        <div class="answer-content">
+                                            <span class="answer-check">✓</span>
+                                            <div>
+                                                <strong>Suggested answer</strong>
+                                                <p>{{ question.answer }}</p>
+                                            </div>
+                                        </div>
+                                    </details>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </article>
+
+                        <article class="result-card short-answer-card">
+                            <div class="result-card-header">
+                                <span class="result-icon result-icon-blue">✎</span>
+                                <div>
+                                    <span class="result-label">CLASSROOM DISCUSSION</span>
+                                    <h3>Short-answer questions</h3>
+                                </div>
+                            </div>
+
+                            <ol class="short-answer-list">
+                                {% for question in analysis.short_answers %}
+                                <li>{{ question }}</li>
+                                {% endfor %}
+                            </ol>
+                        </article>
+
+                        <article class="result-card source-card">
+                            <div class="result-card-header">
+                                <span class="result-icon result-icon-grey">▧</span>
+                                <div>
+                                    <span class="result-label">DOCUMENT INSIGHT</span>
+                                    <h3>Source preview</h3>
+                                </div>
+                            </div>
+
+                            <p class="card-intro">A portion of the text extracted from your uploaded document.</p>
+
+                            <div class="source-text">{{ analysis.source_preview }}</div>
+
+                            <div class="source-footer">
+                                <span class="source-status-dot"></span>
+                                Text extracted for analysis
+                            </div>
+                        </article>
+
+                    </div>
+
+                    <div class="review-notice">
+                        <span class="review-notice-icon">i</span>
+                        <div>
+                            <strong>Teacher review recommended</strong>
+                            <p>
+                                ScholarMind currently uses rule-based text analysis.
+                                Automatically generated questions and definitions may
+                                need correction before classroom use.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="results-bottom-actions no-print">
+                        <a href="#create-lesson" class="outline-button">Create another lesson</a>
+                        <button type="button" class="generate-button" id="printButtonBottom">
+                            Print lesson report <span class="button-arrow">↗</span>
+                        </button>
+                    </div>
+                </section>
+                {% endif %}
+
+                <section class="how-section" id="how-it-works">
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-kicker">THE PROCESS</span>
+                            <h2>From document to lesson</h2>
+                            <p>A simple workflow designed around your teaching process.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-grid">
+                        <div class="process-card">
+                            <span class="process-number">01</span>
+                            <div class="process-icon">↥</div>
+                            <h3>Upload</h3>
+                            <p>Choose a PDF or TXT file containing your learning material.</p>
+                        </div>
+
+                        <div class="process-card">
+                            <span class="process-number">02</span>
+                            <div class="process-icon">⌘</div>
+                            <h3>Organize</h3>
+                            <p>Text analysis helps structure objectives, key terms, and questions.</p>
+                        </div>
+
+                        <div class="process-card">
+                            <span class="process-number">03</span>
+                            <div class="process-icon">✓</div>
+                            <h3>Review</h3>
+                            <p>Check the generated material, make corrections, and prepare your class.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="page-footer">
+                    <a href="#dashboard" class="footer-brand">ScholarMind</a>
+                    <span>Built to support thoughtful teaching.</span>
+                    <a href="#how-it-works">How it works ↑</a>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
